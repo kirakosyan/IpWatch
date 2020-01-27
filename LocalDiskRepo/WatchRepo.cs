@@ -14,7 +14,7 @@ namespace LocalDiskRepo
 
         public WatchRepo(string fileName = null)
         {
-            if(string.IsNullOrWhiteSpace(fileName))
+            if(!string.IsNullOrWhiteSpace(fileName))
             {
                 SettingsFileName = fileName;
             }

@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatcherCore", "WatcherCore\WatcherCore.csproj", "{F4277072-8D88-4299-AC39-505C58D12223}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatcherCore", "WatcherCore\WatcherCore.csproj", "{F4277072-8D88-4299-AC39-505C58D12223}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalDiskRepo", "LocalDiskRepo\LocalDiskRepo.csproj", "{B7D68D7C-BD5C-4704-A530-7C1C634AF7C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocalDiskRepo", "LocalDiskRepo\LocalDiskRepo.csproj", "{B7D68D7C-BD5C-4704-A530-7C1C634AF7C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalDiskRepo.Tests", "LocalDiskRepo.Tests\LocalDiskRepo.Tests.csproj", "{7BAFF151-0AFC-47AD-9F97-A1D59A2E4E73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocalDiskRepo.Tests", "LocalDiskRepo.Tests\LocalDiskRepo.Tests.csproj", "{7BAFF151-0AFC-47AD-9F97-A1D59A2E4E73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatcherApp", "WatcherApp\WatcherApp.csproj", "{EB07B607-AB7A-4057-B8B4-59CB55DB5C18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{7BAFF151-0AFC-47AD-9F97-A1D59A2E4E73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BAFF151-0AFC-47AD-9F97-A1D59A2E4E73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BAFF151-0AFC-47AD-9F97-A1D59A2E4E73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB07B607-AB7A-4057-B8B4-59CB55DB5C18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB07B607-AB7A-4057-B8B4-59CB55DB5C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB07B607-AB7A-4057-B8B4-59CB55DB5C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB07B607-AB7A-4057-B8B4-59CB55DB5C18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
