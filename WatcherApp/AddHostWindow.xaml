@@ -6,9 +6,18 @@
         xmlns:local="clr-namespace:WatcherApp"
         mc:Ignorable="d" 
         ResizeMode="NoResize"
-        Title="Add host" Height="450" Width="600">
+        Title="Add host" Height="600" Width="600">
     <Grid>
         <Label Content="Host" HorizontalAlignment="Left" Margin="82,37,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Center" Margin="0,45,0,0" Text="{Binding Host}" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,45,0,0" Text="{Binding Host.Host}" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
+        <Label Content="Emails" HorizontalAlignment="Left" Margin="73,110,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,114,0,0" Text="{Binding Host.Emails}" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
+        <Label Content="Ping interval (sec)" HorizontalAlignment="Left" Margin="14,170,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="150,178,0,0" Text="{Binding Host.PingIntervalSeconds}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Is enabled" HorizontalAlignment="Left" Margin="53,240,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="" IsChecked="{Binding Host.IsEnabled}" HorizontalAlignment="Left" Margin="150,245,0,0" VerticalAlignment="Top"/>
+        <Label Content="Note" HorizontalAlignment="Left" Margin="81,293,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Center" Height="193" Margin="0,293,0,0" Text="{Binding Host.Note}" TextWrapping="Wrap" VerticalAlignment="Top" Width="280"/>
+        <Button Content="Insert" HorizontalAlignment="Center" Margin="0,530,0,0" VerticalAlignment="Top" Height="44" Width="160" Click="Insert_Click"/>
     </Grid>
 </Window>

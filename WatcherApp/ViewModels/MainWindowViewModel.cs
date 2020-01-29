@@ -9,17 +9,17 @@ namespace WatcherApp.ViewModels
 {
     public class MainWindowViewModel
     {
-        IWatchRepo repo;
+        
         public WatchListEntity List { get; set; }
         
         public MainWindowViewModel()
         {
-            repo = new WatchRepo();
+            List = new WatchListEntity();
         }
 
         public async Task LoadList()
         {
-            List = await repo.GetList();
+            List = await App.Repo.GetList();
         }
     }
 }

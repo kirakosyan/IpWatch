@@ -7,12 +7,37 @@
         mc:Ignorable="d"
         Title="Watcher" Height="450" Width="800">
     <Grid>
-        <ListView Margin="0,0,149,0">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+        <ListView Margin="0,0,149,0" ItemsSource="{Binding List.WatchList}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ShowGridLines="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="300" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Border BorderThickness="1" Grid.Column="0" BorderBrush="Gray" />
+                        <Border BorderThickness="1" Grid.Column="1" BorderBrush="Gray" />
+                        <Border BorderThickness="1" Grid.Column="2" BorderBrush="Gray" />
+                        <Border BorderThickness="1" Grid.Column="3" BorderBrush="Gray" />
+
+                        <TextBlock FontSize="14" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Foreground="Green"  
+         Text="Author Name" Height="20" VerticalAlignment="Top" />
+                        <TextBlock FontSize="14" FontWeight="Bold" Grid.Row="0" Grid.Column="1" Foreground="Green"  
+         Text="Age" Height="20" VerticalAlignment="Top" />
+                        <TextBlock FontSize="14" FontWeight="Bold" Grid.Row="0" Grid.Column="2" Foreground="Green"  
+         Text="Book" Height="20" VerticalAlignment="Top"/>
+
+
+                        <Label Content="{Binding IsOnline}" HorizontalAlignment="Left" Grid.Column="0" />
+                        <Label Content="{Binding IsEnabled}" Grid.Column="1" HorizontalAlignment="Left" />
+                        <Label Content="{Binding Host}" Grid.Column="2" HorizontalAlignment="Left" />
+                        <Label Content="{Binding Emails}" Grid.Column="3"  HorizontalAlignment="Left" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
         <Button Content="New host" HorizontalAlignment="Left" Margin="678,41,0,0" VerticalAlignment="Top" Width="103" Height="25" Click="AddHost_Click"/>
 

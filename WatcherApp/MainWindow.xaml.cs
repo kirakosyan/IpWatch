@@ -28,20 +28,22 @@ namespace WatcherApp
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        protected override void OnActivated(EventArgs e)
-        {
-            base.OnActivated(e);
 
             viewModel = new MainWindowViewModel();
+            var t = Task.Run(() => { viewModel.LoadList(); });
+            t.Wait();
             this.DataContext = viewModel;
+            //MessageBox.Show("count: " + viewModel.List?.WatchList?.Count);
         }
 
-        private void AddHost_Click(object sender, RoutedEventArgs e)
+        private async void AddHost_Click(object sender, RoutedEventArgs e)
         {
             var addHost = new AddHostWindow();
             addHost.ShowDialog();
+
+            await viewModel.LoadList();
+
+            MessageBox.Show("count: " + viewModel.List.WatchList.Count);
         }
     }
 }

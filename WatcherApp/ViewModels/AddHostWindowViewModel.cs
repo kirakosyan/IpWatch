@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using WatcherCore;
 
 namespace WatcherApp.ViewModels
 {
     public class AddHostWindowViewModel
     {
-        public string Host { get; set; }
+        public WatchEntity Host { get; set; }
 
         public AddHostWindowViewModel()
         {
-            Host = "localhost";
+            Host = new WatchEntity();
+            Host.Host = "localhost";
+            Host.PingIntervalSeconds = 5000;
         }
     }
 }
