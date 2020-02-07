@@ -10,23 +10,25 @@ namespace LocalDiskRepo
 {
     public class WatchRepo : IWatchRepo
     {
-        private string SettingsFileName = "WatchList.json";
+        private string _settingsFileName = "WatchList.json";
+
+        public string WatchListFileName { get { return _settingsFileName; } }
 
         public WatchRepo(string fileName = null)
         {
             if(!string.IsNullOrWhiteSpace(fileName))
             {
-                SettingsFileName = fileName;
+                _settingsFileName = fileName;
             }
         }
 
         public async Task<WatchListEntity> GetList()
         {
-            if(!File.Exists(SettingsFileName))
+            if(!File.Exists(_settingsFileName))
             {
                 return null;
             }
-            var r = await File.ReadAllTextAsync(SettingsFileName, Encoding.UTF8);
+            var r = await File.ReadAllTextAsync(_settingsFileName, Encoding.UTF8);
             var list = JsonConvert.DeserializeObject<WatchListEntity>(r);
             return list;
         }
@@ -89,7 +91,7 @@ namespace LocalDiskRepo
 
         private async Task SaveList(WatchListEntity list)
         {
-            await File.WriteAllTextAsync(SettingsFileName, JsonConvert.SerializeObject(list), Encoding.UTF8);
+            await File.WriteAllTextAsync(_settingsFileName, JsonConvert.SerializeObject(list), Encoding.UTF8);
         }
     }
 }

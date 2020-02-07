@@ -5,6 +5,7 @@ namespace WatcherCore
 {
     public interface IWatchRepo
     {
+        string WatchListFileName { get; }
         Task<WatchListEntity> GetList();
         Task<bool> Insert(WatchEntity entity);
         Task<bool> Update(WatchEntity entity);
