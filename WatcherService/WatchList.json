@@ -1,22 +1,20 @@
-﻿{
-	"WatchList": [
-		{
-			"WatchId": "646cf5d1-3558-4e85-b981-84b22f428f84",
-			"Host": "localhost",
-			"PingIntervalSeconds": 10,
-			"Emails": "armen@kirakosyan.com",
-			"Note": null,
-			"IsOnline": false,
-			"IsEnabled": true
-		},
-		{
-			"WatchId": "5103c5d2-54f5-4240-80ae-d9c4fc0317ea",
-			"Host": "kongen.club",
-			"PingIntervalSeconds": 5,
-			"Emails": "ak@kongen.club",
-			"Note": null,
-			"IsOnline": false,
-			"IsEnabled": true
-		}
-	]
-}  
+﻿[
+  {
+    "WatchId": "646cf5d1-3558-4e85-b981-84b22f428f84",
+    "Host": "localhost",
+    "PingIntervalSeconds": 10,
+    "Emails": "armen@kirakosyan.com",
+    "Note": null,
+    "IsOnline": false,
+    "IsEnabled": true
+  },
+  {
+    "WatchId": "5103c5d2-54f5-4240-80ae-d9c4fc0317ea",
+    "Host": "kongen.club",
+    "PingIntervalSeconds": 5,
+    "Emails": "ak@kongen.club",
+    "Note": null,
+    "IsOnline": false,
+    "IsEnabled": true
+  }
+]

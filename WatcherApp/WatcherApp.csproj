@@ -11,4 +11,91 @@
     <ProjectReference Include="..\WatcherCore\WatcherCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Telerik.Documents.SpreadsheetStreaming">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Documents.SpreadsheetStreaming.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Pivot.Core">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Pivot.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Cloud">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Cloud.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Cloud.Controls">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Cloud.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Chart">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.Chart.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Chart.Direct2D">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.Chart.Direct2D.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Charting">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Data">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GanttView">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.GanttView.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.GridView.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView.Export">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.GridView.Export.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView.SpreadsheetStreamingExport">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.GridView.SpreadsheetStreamingExport.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Input">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Media">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.Navigation.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Pivot">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.Pivot.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.PivotFieldList">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.PivotFieldList.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.RibbonView">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.RibbonView.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.RichTextBoxUI">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.RichTextBoxUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.ScheduleView">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.ScheduleView.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Spreadsheet">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.Spreadsheet.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.SpreadsheetUI">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.SpreadsheetUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.VirtualGrid">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Controls.VirtualGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Data">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Diagrams.Core">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.Diagrams.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.MediaFoundation">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.MediaFoundation.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.PersistenceFramework">
+      <HintPath>..\..\..\..\Program Files (x86)\Progress\Telerik UI for WPF R2 2019\Binaries\NetCore\Telerik.Windows.PersistenceFramework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

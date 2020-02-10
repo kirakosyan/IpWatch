@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocalDiskRepo.Tests", "Loca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatcherApp", "WatcherApp\WatcherApp.csproj", "{EB07B607-AB7A-4057-B8B4-59CB55DB5C18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatcherService", "WatcherService\WatcherService.csproj", "{D027DB4B-5CAA-4ADE-8363-6C5A25F6C98A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatcherService", "WatcherService\WatcherService.csproj", "{D027DB4B-5CAA-4ADE-8363-6C5A25F6C98A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

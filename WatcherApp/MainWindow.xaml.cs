@@ -1,18 +1,6 @@
-﻿using LocalDiskRepo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Telerik.Windows.Controls;
 using WatcherApp.ViewModels;
 using WatcherCore;
 
@@ -42,8 +30,35 @@ namespace WatcherApp
             addHost.ShowDialog();
 
             await viewModel.LoadList();
+            //WatchList.Rebind();
+            //MessageBox.Show("count: " + viewModel.List?.Count);
+        }
 
-            MessageBox.Show("count: " + viewModel.List.WatchList.Count);
+        private void DeleteHost_Click(object sender, RoutedEventArgs e)
+        {
+            if (viewModel.SelectedItem == null)
+            {
+                RadWindow.Alert("Please select host first.");
+                return;
+            }
+            //viewModel.List.WatchList.RemoveAt(0);
+            RadWindow.Confirm($"Are you sure you want to delete {viewModel.SelectedItem.Host}?", this.OnDeleteConfirmClosed);
+        }
+
+        private async void OnDeleteConfirmClosed(object sender, WindowClosedEventArgs e)
+        {
+            var result = e.DialogResult;
+            if (result == true)
+            {
+                await viewModel.Delete(viewModel.SelectedItem.WatchId);
+                //WatchList.Rebind();
+            }
+        }
+
+        private void WatchList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var updaeHost = new UpdateHostWindow(viewModel.SelectedItem);
+            updaeHost.ShowDialog();
         }
     }
 }

@@ -71,23 +71,6 @@ namespace WatcherService
                 Logger.LogInformation($"Thread {entity.Host} ping");
                 await Task.Delay(entity.PingIntervalSeconds * 1000);
             }
-            //var t = Task.Run(async () => {
-            //    _logger.LogInformation($"Starting thread 1");
-            //    while (true)
-            //    {
-            //        _logger.LogInformation($"Thread 1 ping");
-            //        await Task.Delay(10000, cancellationToken);
-            //    }
-
-            //}, cancellationToken);
-            //_logger.LogInformation("Thread status: " + t.Status);
-            //if(t.Status == TaskStatus.Canceled)
-            //{
-            //    t.Wait();
-            //}
-
-            //tasks.Add("1", t);
-            //_logger.LogInformation($"Thread 1 started");
         }
 
         private async void StartWatching()
@@ -95,7 +78,7 @@ namespace WatcherService
             Worker.Logger.LogInformation("Worker executing at: {time}", DateTimeOffset.Now);
 
             var list = await repo.GetList();
-            foreach(var l in list?.WatchList)
+            foreach(var l in list)
             {
                 var thread = new Thread(WatcherThread);;
                 thread.Start(l);

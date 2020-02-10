@@ -48,11 +48,11 @@ namespace LocalDiskRepo.Tests
 
             Assert.IsTrue(b);
             list = await repo.GetList();
-            Assert.IsNotNull(list.WatchList);
-            Assert.AreEqual(1, list.WatchList.Count);
+            Assert.IsNotNull(list);
+            Assert.AreEqual(1, list.Count);
 
-            Assert.AreEqual(item.Host, list.WatchList[0].Host);
-            Assert.AreEqual(item.Note, list.WatchList[0].Note);;
+            Assert.AreEqual(item.Host, list[0].Host);
+            Assert.AreEqual(item.Note, list[0].Note);;
         }
 
         [TestMethod]
@@ -84,13 +84,13 @@ namespace LocalDiskRepo.Tests
             await repo.Insert(item2);
 
             var list = await repo.GetList();
-            Assert.AreEqual(2, list.WatchList.Count);
+            Assert.AreEqual(2, list.Count);
 
             await repo.Remove(item.WatchId);
 
             list = await repo.GetList();
-            Assert.AreEqual(1, list.WatchList.Count);
-            Assert.AreEqual(item2.Host, list.WatchList[0].Host);
+            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual(item2.Host, list[0].Host);
 
             File.Delete(fileName);
         }

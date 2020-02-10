@@ -3,43 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         xmlns:local="clr-namespace:WatcherApp"
         mc:Ignorable="d"
         Title="Watcher" Height="450" Width="800">
-    <Grid>
-        <ListView Margin="0,0,149,0" ItemsSource="{Binding List.WatchList}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid ShowGridLines="True">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20" />
-                            <ColumnDefinition Width="20" />
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="300" />
-                        </Grid.ColumnDefinitions>
-                        
-                        <Border BorderThickness="1" Grid.Column="0" BorderBrush="Gray" />
-                        <Border BorderThickness="1" Grid.Column="1" BorderBrush="Gray" />
-                        <Border BorderThickness="1" Grid.Column="2" BorderBrush="Gray" />
-                        <Border BorderThickness="1" Grid.Column="3" BorderBrush="Gray" />
-
-                        <TextBlock FontSize="14" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Foreground="Green"  
-         Text="Author Name" Height="20" VerticalAlignment="Top" />
-                        <TextBlock FontSize="14" FontWeight="Bold" Grid.Row="0" Grid.Column="1" Foreground="Green"  
-         Text="Age" Height="20" VerticalAlignment="Top" />
-                        <TextBlock FontSize="14" FontWeight="Bold" Grid.Row="0" Grid.Column="2" Foreground="Green"  
-         Text="Book" Height="20" VerticalAlignment="Top"/>
-
-
-                        <Label Content="{Binding IsOnline}" HorizontalAlignment="Left" Grid.Column="0" />
-                        <Label Content="{Binding IsEnabled}" Grid.Column="1" HorizontalAlignment="Left" />
-                        <Label Content="{Binding Host}" Grid.Column="2" HorizontalAlignment="Left" />
-                        <Label Content="{Binding Emails}" Grid.Column="3"  HorizontalAlignment="Left" />
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Button Content="New host" HorizontalAlignment="Left" Margin="678,41,0,0" VerticalAlignment="Top" Width="103" Height="25" Click="AddHost_Click"/>
-
-    </Grid>
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <telerik:RadGridView ScrollMode="RealTime" x:Name="WatchList" Height="300" Margin="10" Grid.Column="0" MouseDoubleClick="WatchList_MouseDoubleClick" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}" AutoGenerateColumns="False"  AlternationCount="2">
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding IsOnline}" Header="online" />
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding IsEnabled}" Header="enabled" />
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Host}" Header="host" />
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Emails}" Header="emails" />
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
+            <StackPanel Grid.Column="1" Margin="10">
+            <telerik:RadButton Content="New host" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Height="25" Click="AddHost_Click"/>
+            <telerik:RadButton Content="Delete" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Height="25" Click="DeleteHost_Click"/>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
 </Window>
