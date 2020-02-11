@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WatcherApp.ViewModels;
 using WatcherCore;
 
 namespace WatcherApp
@@ -18,14 +19,24 @@ namespace WatcherApp
     /// </summary>
     public partial class UpdateHostWindow : Window
     {
+        private UpdateHostWindowViewModel viewModel;
+
         public UpdateHostWindow(WatchEntity entity)
         {
             InitializeComponent();
+            viewModel = new UpdateHostWindowViewModel(entity);
         }
 
-        private void Update_Click(object sender, RoutedEventArgs e)
+        protected override void OnActivated(EventArgs e)
         {
+            base.OnActivated(e);
+            DataContext = viewModel;
+        }
 
+        private async void Update_Click(object sender, RoutedEventArgs e)
+        {
+            await App.Repo.Update(viewModel.Host);
+            this.Close();
         }
     }
 }

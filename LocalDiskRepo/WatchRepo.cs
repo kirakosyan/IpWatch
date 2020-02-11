@@ -59,8 +59,8 @@ namespace LocalDiskRepo
         public async Task<bool> Update(WatchEntity entity)
         {
             var list = await GetList();
-
-            list.Remove(entity);
+            var e = list.FirstOrDefault(q => { return q.WatchId == entity.WatchId; });
+            list[list.IndexOf(e)] = entity;
             await SaveList(list);
 
             return true;

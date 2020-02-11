@@ -94,5 +94,44 @@ namespace LocalDiskRepo.Tests
 
             File.Delete(fileName);
         }
+
+        [TestMethod]
+        public async Task UpdateTests()
+        {
+            var fileName = "Test-" + Guid.NewGuid().ToString() + ".json";
+            removeList.Add(fileName);
+            var repo = new WatchRepo(fileName);
+
+            var item = new WatchEntity
+            {
+                Host = Guid.NewGuid().ToString(),
+                Emails = Guid.NewGuid().ToString(),
+                IsEnabled = true,
+                Note = Guid.NewGuid().ToString(),
+                PingIntervalSeconds = 1000
+            };
+
+            await repo.Insert(item);
+
+            item.Host = Guid.NewGuid().ToString();
+            item.Emails = Guid.NewGuid().ToString();
+            item.IsEnabled = false;
+            item.Note = Guid.NewGuid().ToString();
+            item.PingIntervalSeconds = 2000;
+
+            await repo.Update(item);
+
+            var list = await repo.GetList();
+            Assert.AreEqual(1, list.Count);
+
+            Assert.AreEqual(item.WatchId, list[0].WatchId);
+            Assert.AreEqual(item.Host, list[0].Host);
+            Assert.AreEqual(item.Emails, list[0].Emails);
+            Assert.AreEqual(item.IsEnabled, list[0].IsEnabled);
+            Assert.AreEqual(item.Note, list[0].Note);
+            Assert.AreEqual(item.PingIntervalSeconds, list[0].PingIntervalSeconds);
+
+            File.Delete(fileName);
+        }
     }
 }

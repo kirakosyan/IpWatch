@@ -30,8 +30,6 @@ namespace WatcherApp
             addHost.ShowDialog();
 
             await viewModel.LoadList();
-            //WatchList.Rebind();
-            //MessageBox.Show("count: " + viewModel.List?.Count);
         }
 
         private void DeleteHost_Click(object sender, RoutedEventArgs e)
@@ -51,14 +49,15 @@ namespace WatcherApp
             if (result == true)
             {
                 await viewModel.Delete(viewModel.SelectedItem.WatchId);
-                //WatchList.Rebind();
             }
         }
 
-        private void WatchList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private async void WatchList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var updaeHost = new UpdateHostWindow(viewModel.SelectedItem);
             updaeHost.ShowDialog();
+            await viewModel.LoadList();
+            
         }
     }
 }
