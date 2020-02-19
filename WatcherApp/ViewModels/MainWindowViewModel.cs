@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using WatcherCore;
 
@@ -17,8 +18,9 @@ namespace WatcherApp.ViewModels
 
         public async Task LoadList()
         {
-            var list = await App.Repo.GetList();
+            Thread.Sleep(2000);
             List.Clear();
+            var list = await App.Repo.GetList();
             foreach(var l in list)
             {
                 List.Add(l);

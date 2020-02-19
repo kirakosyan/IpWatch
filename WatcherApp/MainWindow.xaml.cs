@@ -1,6 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
+using System.Windows.Media;
 using Telerik.Windows.Controls;
+using Telerik.Windows.Controls.GridView;
 using WatcherApp.ViewModels;
 using WatcherCore;
 
@@ -12,6 +17,7 @@ namespace WatcherApp
     public partial class MainWindow : Window
     {
         MainWindowViewModel viewModel;
+        private FileSystemWatcher fileWatcher;
 
         public MainWindow()
         {
@@ -20,8 +26,22 @@ namespace WatcherApp
             viewModel = new MainWindowViewModel();
             var t = Task.Run(() => { viewModel.LoadList(); });
             t.Wait();
+            
             this.DataContext = viewModel;
+
+            fileWatcher = new FileSystemWatcher(Directory.GetCurrentDirectory());
+            fileWatcher.Filter = App.Repo.WatchListFileName;
+            fileWatcher.Changed += FileWatcher_Changed;
+            // Begin watching.
+            fileWatcher.EnableRaisingEvents = true;
             //MessageBox.Show("count: " + viewModel.List?.WatchList?.Count);
+        }
+
+        private async void FileWatcher_Changed(object sender, FileSystemEventArgs e)
+        {
+            fileWatcher.EnableRaisingEvents = false;
+            await viewModel.LoadList();
+            fileWatcher.EnableRaisingEvents = true;
         }
 
         private async void AddHost_Click(object sender, RoutedEventArgs e)
@@ -57,7 +77,6 @@ namespace WatcherApp
             var updaeHost = new UpdateHostWindow(viewModel.SelectedItem);
             updaeHost.ShowDialog();
             await viewModel.LoadList();
-            
         }
     }
 }

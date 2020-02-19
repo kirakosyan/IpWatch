@@ -12,6 +12,7 @@ namespace LocalDiskRepo
     public class WatchRepo : IWatchRepo
     {
         private string _settingsFileName = "WatchList.json";
+        //static readonly object _fileAccess = new object();
 
         public string WatchListFileName { get { return _settingsFileName; } }
 
@@ -25,10 +26,14 @@ namespace LocalDiskRepo
 
         public async Task<List<WatchEntity>> GetList()
         {
-            if(!File.Exists(_settingsFileName))
+            if (!File.Exists(_settingsFileName))
             {
                 return null;
             }
+            //using (FileStream fs = new FileStream(_settingsFileName, FileMode.OpenOrCreate, FileAccess.Read, FileShare.Read))
+            //{
+               
+            //}
             var r = await File.ReadAllTextAsync(_settingsFileName, Encoding.UTF8);
             var list = JsonConvert.DeserializeObject<List<WatchEntity>>(r);
             return list;

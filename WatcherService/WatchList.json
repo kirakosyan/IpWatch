@@ -16,5 +16,14 @@
     "Note": null,
     "IsOnline": false,
     "IsEnabled": true
+  },
+  {
+    "WatchId": "2203c5d2-54f5-4240-80ae-d9c4fc0317ea",
+    "Host": "unknown-failure.club",
+    "PingIntervalSeconds": 5,
+    "Emails": "ak@kongen.club",
+    "Note": null,
+    "IsOnline": false,
+    "IsEnabled": true
   }
 ]

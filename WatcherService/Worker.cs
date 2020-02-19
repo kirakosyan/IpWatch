@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
@@ -68,7 +70,39 @@ namespace WatcherService
             Worker.Logger.LogInformation("Starting thread for " + entity.Host);
             while (true)
             {
-                Logger.LogInformation($"Thread {entity.Host} ping");
+                string data = "a quick brown fox jumped over the lazy dog";
+
+                Ping pingSender = new Ping();
+                PingOptions options = new PingOptions
+                {
+                    DontFragment = true
+                };
+
+                byte[] buffer = Encoding.ASCII.GetBytes(data);
+                int timeout = 1024;
+
+                Logger.LogInformation($"Pinging {entity.Host}");
+                try
+                {
+                    PingReply reply = pingSender.Send(entity.Host, timeout, buffer, options);
+                    if (reply.Status == IPStatus.Success)
+                    {
+                        Logger.LogInformation($"Address: {reply.Address}");
+                        Logger.LogInformation($"RoundTrip time: {reply.RoundtripTime}");
+                        //Logger.LogInformation($"Time to live: {reply.Options?.Ttl}");
+                        //Logger.LogInformation($"Don't fragment: {reply.Options?.DontFragment}");
+                        Logger.LogInformation($"Buffer size: {reply.Buffer.Length}");
+                    }
+                    else
+                    {
+                        Logger.LogError(reply.Status.ToString());
+                    }
+                }
+                catch(Exception ex)
+                {
+                    Logger.LogError(ex.ToString());
+                }
+
                 await Task.Delay(entity.PingIntervalSeconds * 1000);
             }
         }

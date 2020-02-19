@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using LocalDbRepo;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -10,8 +7,12 @@ namespace WatcherService
 {
     public class Program
     {
+        private static ListRepoContext listRepoContext;
         public static void Main(string[] args)
         {
+            listRepoContext = new ListRepoContext();
+            listRepoContext.Database.EnsureCreated();
+
             CreateHostBuilder(args).Build().Run();
         }
 
