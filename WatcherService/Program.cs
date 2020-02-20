@@ -1,4 +1,5 @@
 using LocalDbRepo;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -11,7 +12,7 @@ namespace WatcherService
         public static void Main(string[] args)
         {
             listRepoContext = new ListRepoContext();
-            listRepoContext.Database.EnsureCreated();
+            listRepoContext.Database.Migrate();
 
             CreateHostBuilder(args).Build().Run();
         }

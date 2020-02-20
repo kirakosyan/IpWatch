@@ -28,13 +28,6 @@ namespace WatcherApp
             t.Wait();
             
             this.DataContext = viewModel;
-
-            fileWatcher = new FileSystemWatcher(Directory.GetCurrentDirectory());
-            fileWatcher.Filter = App.Repo.WatchListFileName;
-            fileWatcher.Changed += FileWatcher_Changed;
-            // Begin watching.
-            fileWatcher.EnableRaisingEvents = true;
-            //MessageBox.Show("count: " + viewModel.List?.WatchList?.Count);
         }
 
         private async void FileWatcher_Changed(object sender, FileSystemEventArgs e)

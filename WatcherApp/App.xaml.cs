@@ -1,10 +1,4 @@
-﻿using LocalDiskRepo;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LocalDbRepo;
 using System.Windows;
 using WatcherCore;
 
@@ -19,7 +13,7 @@ namespace WatcherApp
 
         public App()
         {
-            Repo = new WatchRepo();
+            Repo = new ListRepoContext();
         }
     }
 }

@@ -18,38 +18,15 @@ namespace WatcherService
         //private readonly ILogger<Worker> _logger;
         private IWatchRepo repo;
         private Dictionary<string, Thread> threads;
-        private FileSystemWatcher fileWatcher;
         private CancellationToken cancellationToken;
 
         public Worker(ILogger<Worker> logger)
         {
             Worker.Logger = logger;
             Worker.Logger.LogInformation("Folder: " + Directory.GetCurrentDirectory());
-            repo = new LocalDiskRepo.WatchRepo();
+            //repo = new LocalDiskRepo.WatchRepo();
+            repo = new LocalDbRepo.ListRepoContext();
             threads = new Dictionary<string, Thread>();
-
-            fileWatcher = new FileSystemWatcher(Directory.GetCurrentDirectory());
-            fileWatcher.Filter = repo.WatchListFileName;
-            fileWatcher.Changed += FileWatcher_Changed;
-            // Begin watching.
-            fileWatcher.EnableRaisingEvents = true;
-        }
-
-        private async void FileWatcher_Changed(object sender, FileSystemEventArgs e)
-        {
-            fileWatcher.EnableRaisingEvents = false;
-            Worker.Logger.LogInformation("Restarting Watcher!");
-            await this.StopAsync(cancellationToken);
-            foreach(var t in threads)
-            {
-                t.Value.Abort();
-            }
-
-            threads.Clear();
-            Thread.Sleep(2000);
-            cancellationToken = new CancellationToken(false);
-            StartWatching();
-            fileWatcher.EnableRaisingEvents = true;
         }
 
         public override Task StartAsync(CancellationToken cancellationToken)

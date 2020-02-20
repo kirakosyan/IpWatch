@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LocalDbRepo\LocalDbRepo.csproj" />
-    <ProjectReference Include="..\LocalDiskRepo\LocalDiskRepo.csproj" />
     <ProjectReference Include="..\WatcherCore\WatcherCore.csproj" />
   </ItemGroup>
 </Project>
