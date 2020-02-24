@@ -27,7 +27,8 @@ namespace LocalDbRepo
 
         public ListRepoContext(string connectionString = null)
         {
-            if(!string.IsNullOrWhiteSpace(connectionString))
+            this.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            if (!string.IsNullOrWhiteSpace(connectionString))
             {
                 ConnectionString = connectionString;
             }
@@ -53,7 +54,7 @@ namespace LocalDbRepo
 
         public Task<List<WatchEntity>> GetList()
         {
-            return WatchEntities.ToListAsync();
+            return WatchEntities.AsNoTracking().ToListAsync();
         }
 
         public async Task<bool> Insert(WatchEntity entity)
@@ -64,19 +65,36 @@ namespace LocalDbRepo
             return true;
         }
 
-        public new Task<bool> Update(WatchEntity entity)
+        public async Task<bool> Update(WatchEntity entity)
         {
-            throw new NotImplementedException();
+            var c = await this.Database.ExecuteSqlInterpolatedAsync($@"update WatchEntities set 
+Emails ={entity.Emails},
+Host ={entity.Host},
+IsOnline ={entity.IsOnline},
+IsEnabled ={entity.IsEnabled},
+PingIntervalSeconds ={entity.PingIntervalSeconds},
+Note = {entity.Note}
+where WatchId = {entity.WatchId}");
+            
+            return c == 1;
         }
 
-        public new Task<bool> Remove(Guid watchId)
+        public async Task<bool> Remove(Guid watchId)
         {
-            throw new NotImplementedException();
+            //var e = await GetItem(watchId);
+            // WatchEntities.Remove(e);
+            using (var context = new ListRepoContext(ConnectionString))
+            {
+                context.Remove<WatchEntity>(new WatchEntity { WatchId = watchId });
+                await context.SaveChangesAsync();
+            }
+            return true;
         }
 
-        public Task<WatchEntity> GetItem(List<WatchEntity> list, Guid watchId)
+        public async Task<WatchEntity> GetItem(Guid watchId)
         {
-            return WatchEntities.FirstOrDefaultAsync(i=>i.WatchId == watchId); 
+            var e = await WatchEntities.FromSqlInterpolated($@"select * from WatchEntities where WatchId = {watchId}").FirstOrDefaultAsync();
+            return e;
         }
     }
 }

@@ -10,6 +10,6 @@ namespace WatcherCore
         Task<bool> Insert(WatchEntity entity);
         Task<bool> Update(WatchEntity entity);
         Task<bool> Remove(Guid watchId);
-        Task<WatchEntity> GetItem(List<WatchEntity> list, Guid watchId);
+        Task<WatchEntity> GetItem(Guid watchId);
     }
 }

@@ -18,7 +18,6 @@ namespace WatcherApp.ViewModels
 
         public async Task LoadList()
         {
-            Thread.Sleep(2000);
             List.Clear();
             var list = await App.Repo.GetList();
             foreach(var l in list)

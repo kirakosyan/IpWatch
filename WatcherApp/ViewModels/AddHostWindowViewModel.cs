@@ -10,7 +10,7 @@ namespace WatcherApp.ViewModels
         {
             Host = new WatchEntity();
             Host.Host = "localhost";
-            Host.PingIntervalSeconds = 5000;
+            Host.PingIntervalSeconds = 5;
         }
     }
 }
