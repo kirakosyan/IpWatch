@@ -81,14 +81,8 @@ where WatchId = {entity.WatchId}");
 
         public async Task<bool> Remove(Guid watchId)
         {
-            //var e = await GetItem(watchId);
-            // WatchEntities.Remove(e);
-            using (var context = new ListRepoContext(ConnectionString))
-            {
-                context.Remove<WatchEntity>(new WatchEntity { WatchId = watchId });
-                await context.SaveChangesAsync();
-            }
-            return true;
+            var c = await this.Database.ExecuteSqlInterpolatedAsync($@"delete from WatchEntities where WatchId = {watchId}");
+            return c==1;
         }
 
         public async Task<WatchEntity> GetItem(Guid watchId)

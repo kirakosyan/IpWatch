@@ -2,9 +2,9 @@
 {
     public class SmtpSettings
     {
-        public string SmtpServer { get; set; }
+        public string Server { get; set; }
 
-        public int SmtpPort { get; set; }
+        public int Port { get; set; }
 
         public string Username { get; set; }
 

@@ -1,13 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
-using System.Windows.Media;
 using Telerik.Windows.Controls;
-using Telerik.Windows.Controls.GridView;
 using WatcherApp.ViewModels;
-using WatcherCore;
 
 namespace WatcherApp
 {
@@ -17,7 +12,6 @@ namespace WatcherApp
     public partial class MainWindow : Window
     {
         MainWindowViewModel viewModel;
-        private FileSystemWatcher fileWatcher;
 
         public MainWindow()
         {
@@ -26,15 +20,13 @@ namespace WatcherApp
             viewModel = new MainWindowViewModel();
             var t = Task.Run(() => { viewModel.LoadList(); });
             t.Wait();
-            
+
             this.DataContext = viewModel;
         }
 
         private async void FileWatcher_Changed(object sender, FileSystemEventArgs e)
         {
-            fileWatcher.EnableRaisingEvents = false;
             await viewModel.LoadList();
-            fileWatcher.EnableRaisingEvents = true;
         }
 
         private async void AddHost_Click(object sender, RoutedEventArgs e)
@@ -59,7 +51,7 @@ namespace WatcherApp
         private async void OnDeleteConfirmClosed(object sender, WindowClosedEventArgs e)
         {
             var result = e.DialogResult;
-            if (result == true)
+            if (result == true && viewModel.SelectedItem != null)
             {
                 await viewModel.Delete(viewModel.SelectedItem.WatchId);
             }

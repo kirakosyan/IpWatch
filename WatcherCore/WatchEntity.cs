@@ -14,5 +14,7 @@ namespace WatcherCore
         public bool IsOnline { get; set; }
         public DateTime TimeSinceLastStatusChange { get; set; }
         public bool IsEnabled { get; set; }
+        [Timestamp]
+        public byte[] Timestamp { get; set; }
     }
 }

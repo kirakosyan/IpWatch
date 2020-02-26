@@ -19,6 +19,7 @@ CREATE TABLE [dbo].[WatchEntities](
 	[IsOnline] [bit] NOT NULL,
 	[TimeSinceLastStatusChange] [datetime2](7) NOT NULL,
 	[IsEnabled] [bit] NOT NULL,
+	[Timestamp] rowversion
  CONSTRAINT [PK_WatchEntities] PRIMARY KEY CLUSTERED 
 (
 	[WatchId] ASC

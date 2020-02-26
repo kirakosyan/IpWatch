@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LocalDbRepo\LocalDbRepo.csproj" />
+    <ProjectReference Include="..\Messaging\Messaging.csproj" />
     <ProjectReference Include="..\WatcherCore\WatcherCore.csproj" />
   </ItemGroup>
 </Project>
