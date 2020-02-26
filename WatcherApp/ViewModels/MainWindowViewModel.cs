@@ -3,20 +3,20 @@ using System.Collections.ObjectModel;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Timers;
-using WatcherCore;
+using WatcherApp.Models;
 
 namespace WatcherApp.ViewModels
 {
     public class MainWindowViewModel
     {
-        public ObservableCollection<WatchEntity> List { get; set; }
-        public WatchEntity SelectedItem { get; set; }
+        public ObservableCollection<WatchModel> List { get; set; }
+        public WatchModel SelectedItem { get; set; }
 
         private Timer timer;
 
         public MainWindowViewModel()
         {
-            List = new ObservableCollection<WatchEntity>();
+            List = new ObservableCollection<WatchModel>();
 
             timer = new Timer();
             timer.Interval = 10000;
@@ -56,7 +56,18 @@ namespace WatcherApp.ViewModels
             List.Clear();
             foreach (var l in list)
             {
-                List.Add(l);
+                List.Add(new WatchModel
+                {
+                    WatchId = l.WatchId,
+                    Emails = l.Emails,
+                    Host = l.Host,
+                    IsEnabled = l.IsEnabled,
+                    IsOnline = l.IsOnline,
+                    Note = l.Note,
+                    PingIntervalSeconds = l.PingIntervalSeconds,
+                    Timestamp = l.Timestamp,
+                    TimeSinceLastStatusChange = l.TimeSinceLastStatusChange
+                });
             }
         }
 

@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 // dotnet tool install --global dotnet-ef --version 3.1.1
 namespace LocalDbRepo.Tests
@@ -15,7 +12,7 @@ namespace LocalDbRepo.Tests
     [TestClass]
     public class Init : TestBase
     {
-        private static string connectionString = "Server=(localdb)\\MSSQLLocalDB;Initial Catalog=IpWatcher;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private static string connectionString = "Server=(localdb)\\MSSQLLocalDB;Initial Catalog=IpWatcherTest;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         [AssemblyInitialize]
         public static void SetupDb(TestContext context)

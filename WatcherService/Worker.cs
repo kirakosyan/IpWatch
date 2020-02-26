@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.NetworkInformation;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,8 +20,11 @@ namespace WatcherService
         private static ILogger Logger;
         //private readonly ILogger<Worker> _logger;
         private static IWatchRepo repo;
-        private Dictionary<string, Thread> threads;
+        private Dictionary<Guid, Thread> threads;
         private CancellationToken cancellationToken;
+        private static List<WatchEntity> EntityList;
+
+        private System.Timers.Timer timer;
 
         public Worker(ILogger<Worker> logger, IConfiguration configuration)
         {
@@ -28,7 +32,7 @@ namespace WatcherService
             Worker.Logger.LogInformation("Folder: " + Directory.GetCurrentDirectory());
             //repo = new LocalDiskRepo.WatchRepo();
             repo = new LocalDbRepo.ListRepoContext();
-            threads = new Dictionary<string, Thread>();
+            threads = new Dictionary<Guid, Thread>();
 
             var s = new SmtpSettings
             {
@@ -40,6 +44,37 @@ namespace WatcherService
             };
 
             SmtpClient = new SMTPClient(s);
+
+            timer = new System.Timers.Timer();
+            timer.Interval = 10000;
+            timer.Elapsed += Timer_Elapsed; ;
+            timer.Start();
+        }
+
+        private async void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            //timer.Stop();
+
+            //var list = await repo.GetList();
+            //for (int c = 0; c < list.Count; c++)
+            //{
+            //    string hash1;
+            //    string hash2;
+            //    using (SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider())
+            //    {
+            //        hash1 = Convert.ToBase64String(sha1.ComputeHash(list[c].Timestamp));
+            //        hash2 = Convert.ToBase64String(sha1.ComputeHash(List[c].Timestamp));
+            //    }
+
+            //    if (hash1 != hash2)
+            //    {
+            //        await LoadList();
+            //        timer.Start();
+            //        break;
+            //    }
+            //}
+
+            //timer.Start();
         }
 
         public override Task StartAsync(CancellationToken cancellationToken)
@@ -61,6 +96,14 @@ namespace WatcherService
             Worker.Logger.LogInformation("Starting thread for " + entity.Host);
             while (true)
             {
+                // var e = await repo.GetItem(entity.WatchId);
+                var e = EntityList.Find(m => { return m.WatchId == entity.WatchId; });
+                if(!e.IsEnabled)
+                {
+                    Worker.Logger.LogInformation($"{entity.Host} was disabled");
+                    break;
+                }
+
                 string data = "a quick brown fox jumped over the lazy dog";
 
                 Ping pingSender = new Ping();
@@ -121,22 +164,70 @@ namespace WatcherService
         {
             Worker.Logger.LogInformation("Worker executing at: {time}", DateTimeOffset.Now);
 
-            var list = await repo.GetList();
-            foreach(var l in list)
+            EntityList = await repo.GetList();
+            threads = new Dictionary<Guid, Thread>();
+            foreach(var l in EntityList)
             {
                 if (l.IsEnabled)
                 {
                     var thread = new Thread(WatcherThread);
+                    
                     thread.Start(l);
+                    threads.Add(l.WatchId, thread);
                 }
             }
 
+            EntityList = await repo.GetList();
             while (!cancellationToken.IsCancellationRequested)
             {
-                //Worker.Logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                list = await repo.GetList();
-                //Worker.Logger.LogInformation($"Found {list?.WatchList?.Count ?? 0} hosts to ping");
+                var list = await repo.GetList();
+                for (int c = 0; c < list.Count; c++)
+                {
+                    string hash1;
+                    string hash2;
+                    using (SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider())
+                    {
+                        hash1 = Convert.ToBase64String(sha1.ComputeHash(list[c].Timestamp));
+                        hash2 = Convert.ToBase64String(sha1.ComputeHash(EntityList[c].Timestamp));
+                    }
 
+                    if (hash1 != hash2)
+                    {
+                        if (threads.ContainsKey(list[c].WatchId))
+                        {
+                            try
+                            {
+                                threads[list[c].WatchId].Abort();
+                            }
+                            catch (PlatformNotSupportedException)
+                            {
+                                // DO NOTHING
+                                //https://docs.microsoft.com/en-us/dotnet/standard/threading/destroying-threads
+                            }
+                            threads.Remove(list[c].WatchId);
+                        }
+
+                        if (list[c].IsEnabled)
+                        {
+                            var thread = new Thread(WatcherThread);
+
+                            EntityList = await repo.GetList();
+                            
+                            thread.Start(list[c]);
+                            threads.Add(list[c].WatchId, thread);
+
+                            Logger.LogInformation($"{list[c].Host} host was updated, thread was restarted.");
+                        }
+                        else
+                        {
+                            Logger.LogInformation($"{list[c].Host} host was updated, not pinging anymore.");
+                        }
+                    }
+                }
+
+                EntityList = await repo.GetList();
+
+                Logger.LogInformation("Checking host status completed");
                 await Task.Delay(10000);
             }
         }
