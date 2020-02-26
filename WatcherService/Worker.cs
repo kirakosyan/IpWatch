@@ -18,7 +18,6 @@ namespace WatcherService
     {
         public static SMTPClient SmtpClient;
         private static ILogger Logger;
-        //private readonly ILogger<Worker> _logger;
         private static IWatchRepo repo;
         private Dictionary<Guid, Thread> threads;
         private CancellationToken cancellationToken;
@@ -30,7 +29,7 @@ namespace WatcherService
         {
             Worker.Logger = logger;
             Worker.Logger.LogInformation("Folder: " + Directory.GetCurrentDirectory());
-            //repo = new LocalDiskRepo.WatchRepo();
+
             repo = new LocalDbRepo.ListRepoContext();
             threads = new Dictionary<Guid, Thread>();
 
@@ -195,15 +194,6 @@ namespace WatcherService
                     {
                         if (threads.ContainsKey(list[c].WatchId))
                         {
-                            try
-                            {
-                                threads[list[c].WatchId].Abort();
-                            }
-                            catch (PlatformNotSupportedException)
-                            {
-                                // DO NOTHING
-                                //https://docs.microsoft.com/en-us/dotnet/standard/threading/destroying-threads
-                            }
                             threads.Remove(list[c].WatchId);
                         }
 
