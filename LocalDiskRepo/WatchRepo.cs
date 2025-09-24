@@ -74,19 +74,25 @@ namespace LocalDiskRepo
         public async Task<bool> Remove(Guid watchId)
         {
             var list = await GetList();
-            var item = await GetItem(list, watchId);
+            var item = GetItem(list, watchId);
             list.Remove(item);
             await SaveList(list);
             return true;
         }
 
-        public async Task<WatchEntity> GetItem(List<WatchEntity> list, Guid watchId)
+        public async Task<WatchEntity> GetItem(Guid watchId)
         {
+            var list = await GetList();
             if(list == null)
             {
-                list = await GetList();
+                return null;
             }
 
+            return list.SingleOrDefault<WatchEntity>(e => { return e.WatchId == watchId; });
+        }
+
+        private WatchEntity GetItem(List<WatchEntity> list, Guid watchId)
+        {
             if(list == null)
             {
                 return null;
