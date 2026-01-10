@@ -184,7 +184,7 @@ namespace WatcherService
                 {
                     string hash1;
                     string hash2;
-                    using (SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider())
+                    using (var sha1 = System.Security.Cryptography.SHA1.Create())
                     {
                         hash1 = Convert.ToBase64String(sha1.ComputeHash(list[c].Timestamp));
                         hash2 = Convert.ToBase64String(sha1.ComputeHash(EntityList[c].Timestamp));

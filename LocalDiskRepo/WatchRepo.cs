@@ -80,6 +80,12 @@ namespace LocalDiskRepo
             return true;
         }
 
+        public async Task<WatchEntity> GetItem(Guid watchId)
+        {
+            var list = await GetList();
+            return await GetItem(list, watchId);
+        }
+
         public async Task<WatchEntity> GetItem(List<WatchEntity> list, Guid watchId)
         {
             if(list == null)
